@@ -1,150 +1,115 @@
-# TCS Hackathon Metadata Enhancer App
+# Metadata Enhancer
 
-![CI/CD Pipeline](https://github.com/akshayshinde1211/Hackathon-Metadata-Enhancer-App/actions/workflows/ci-cd.yml/badge.svg)
+<div align="center">
+
+![CI/CD](https://github.com/akshayshinde1211/Hackathon-Metadata-Enhancer-App/actions/workflows/ci-cd.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
+![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
+![Kubernetes](https://img.shields.io/badge/kubernetes-deployable-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+**An Enterprise-Grade Data Governance Tool Powered by Generative AI**
+
+[Features](#-key-features) • [Architecture](#-system-architecture) • [Getting Started](#-getting-started) • [DevOps](#-engineering-excellence)
+
+</div>
+
+---
 
 ## 🚀 Project Overview
-The **Metadata Description Enhancer** is an intelligent data governance tool designed to solve the "blank cover" problem in enterprise data catalogs. By leveraging Generative AI (Google Gemini), it automatically analyzes technical schemas and raw data samples to generate rich, business-ready documentation, data quality insights, and usage recommendations.
 
-This project was built for the **TCS AI Fridays Hackathon** to demonstrate how GenAI can accelerate data literacy and governance.
+The **Metadata Enhancer** solves the critical "blank cover" problem in enterprise data catalogs. By leveraging **Google Gemini 2.0**, it automatically analyzes technical schemas, raw data samples, and usage logs to generate rich, business-ready documentation.
+
+This project demonstrates a complete **End-to-End DevOps Lifecycle**, featuring containerization, automated CI/CD pipelines, and Kubernetes orchestration.
+
+## 🏗 System Architecture
+
+```mermaid
+graph TD
+    User[User] -->|Uploads Files| UI[Frontend (HTML/JS)]
+    UI -->|POST /api/generate| API[FastAPI Backend]
+    API -->|Parse| Parser[Parser Service]
+    API -->|Context| AI[AI Service]
+    AI -->|Prompt| Gemini[Google Gemini API]
+    Gemini -->|Description| AI
+    AI -->|JSON Result| API
+    API -->|Response| UI
+```
 
 ## ✨ Key Features
-*   **Automated Metadata Generation**: Instantly creates descriptions, business context, and technical summaries.
-*   **Multi-Input Analysis**: Combines insights from JSON/DDL schemas, CSV sample data, and usage logs.
-*   **Data Quality Assessment**: Automatically detects potential quality issues (missing values, outliers, format inconsistencies).
-*   **Usage Recommendations**: Suggests SQL queries and analytical use cases for the data.
-*   **Standardized Exports**: Download generated metadata in **JSON** or **XML** formats for easy integration with catalogs (e.g., Collibra, Alation).
-*   **Enterprise UI**: A professional, TCS-branded web interface.
 
-## 🛠️ Tech Stack
-*   **Backend**: Python 3.10+, FastAPI
-*   **Frontend**: HTML5, Tailwind CSS (via CDN), Vanilla JavaScript
-*   **AI Engine**: Google Gemini 2.0 Flash (via `google-generativeai` SDK)
-*   **Template Engine**: Jinja2
+| Feature | Description |
+| :--- | :--- |
+| **🤖 AI-Powered Analysis** | Instantly generates business context and descriptions from raw schemas. |
+| **📊 Multi-Source Input** | Combines insights from JSON/DDL schemas, CSV samples, and logs. |
+| **🛡️ Data Quality** | Automatically detects missing values, outliers, and format inconsistencies. |
+| **💡 Smart Recommendations** | Suggests SQL queries and analytical use cases for the data. |
+| **📦 Standardized Exports** | Download metadata in JSON or XML for integration with catalogs like Collibra. |
 
-## 📋 Prerequisites
-*   Python 3.10 or higher
-*   A Google Gemini API Key
+## 🛠 Tech Stack
 
-## ⚙️ Installation & Setup
+*   **Backend**: Python 3.9, FastAPI
+*   **Frontend**: Vanilla JS, Tailwind CSS
+*   **AI Engine**: Google Gemini 2.0 Flash
+*   **Infrastructure**: Docker, Kubernetes
+*   **CI/CD**: GitHub Actions
 
-1.  **Clone the Repository** (or extract the project folder):
-    ```bash
-    cd TCS
-    ```
+## 🏁 Getting Started
 
-2.  **Create a Virtual Environment**:
-    ```bash
-    python -m venv venv
-    ```
+### Option 1: Docker (Recommended)
+Run the application in a containerized environment.
 
-3.  **Activate the Virtual Environment**:
-    *   **Windows**:
-        ```powershell
-        .\venv\Scripts\activate
-        ```
-    *   **Mac/Linux**:
-        ```bash
-        source venv/bin/activate
-        ```
+```bash
+# Build and Run
+docker-compose up --build
+```
+*Access the app at `http://localhost:8000`*
 
-4.  **Install Dependencies**:
+### Option 2: Local Development
+1.  **Install Dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
-    *(Note: If `requirements.txt` is missing, install manually: `pip install fastapi uvicorn python-multipart jinja2 python-dotenv google-generativeai requests`)*
-
-5.  **Configure Environment Variables**:
-    *   Create a `.env` file in the root directory.
-    *   Add your Gemini API key:
-        ```env
-        GEMINI_API_KEY=your_actual_api_key_here
-        ```
-
-##  ▶️ Running the Application
-
-1.  **Start the Server**:
-    ```bash
-    python main.py
+2.  **Configure Environment**:
+    Create a `.env` file with your API key:
+    ```env
+    GEMINI_API_KEY=your_key_here
     ```
-    *Alternatively, use Uvicorn directly:*
+3.  **Run Server**:
     ```bash
     uvicorn main:app --reload
     ```
 
-2.  **Access the Web Interface**:
-    *   Open your browser and navigate to: `http://127.0.0.1:8000`
+## ⚙️ Engineering Excellence (DevOps)
 
-## 🐳 Docker Support
+This project is built with modern DevOps best practices.
 
-You can also run the application using Docker.
+### 🔄 CI/CD Pipeline
+*   **Automated Testing**: Every push triggers `flake8` linting and unit tests.
+*   **Continuous Delivery**: Successful builds are automatically pushed to Docker Hub.
+*   **Workflow**: Defined in `.github/workflows/ci-cd.yml`.
 
-1.  **Build the Container**:
-    ```bash
-    docker-compose build
-    ```
+### ☸️ Kubernetes Orchestration
+Deployable to any K8s cluster with high availability.
 
-2.  **Run the Container**:
-    ```bash
-    docker-compose up
-    ```
-    *The application will be available at `http://localhost:8000`.*
-
-## 🚀 DevOps Guide
-
-This project is equipped with a complete DevOps lifecycle.
-
-### 1. CI/CD Pipeline (GitHub Actions)
-The pipeline automatically runs tests and builds the Docker image on every push to `main`.
-
-**Setup:**
-1.  Push this code to a GitHub repository.
-2.  Go to **Settings > Secrets and variables > Actions**.
-3.  Add the following Repository Secrets:
-    *   `DOCKER_USERNAME`: Your Docker Hub username.
-    *   `DOCKER_PASSWORD`: Your Docker Hub access token.
-
-### 2. Kubernetes Deployment
-Deploy the application to any Kubernetes cluster.
-
-**Prerequisites:**
-*   `kubectl` installed and configured.
-*   A running Kubernetes cluster (e.g., Docker Desktop with Kubernetes enabled).
-
-**Deploy:**
-Run the helper script:
 ```bash
+# Deploy to cluster
 ./scripts/deploy.sh
 ```
-*You will be prompted to enter your Gemini API Key, which will be securely stored as a Kubernetes Secret.*
-
-## 📂 Project Structure
-```
-TCS/
-├── main.py                 # FastAPI application entry point
-├── services/
-│   ├── ai_service.py       # Logic for interacting with Google Gemini
-│   └── parser_service.py   # File parsing logic (JSON, CSV)
-├── templates/
-│   └── index.html          # Main frontend UI (TCS branded)
-├── static/
-│   ├── js/
-│   │   └── app.js          # Frontend logic
-│   └── user_logo.png       # TCS Logo
-├── test_data/              # Sample files for testing
-│   ├── schema.json
-│   └── data.csv
-├── .env                    # API Key configuration (not committed)
-└── README.md               # Project documentation
-```
+*   **Scalability**: Configured for 2 replicas by default.
+*   **Security**: API keys are managed via Kubernetes Secrets.
 
 ## 🔒 Security
 
-This project takes security seriously.
-
-*   **API Keys**: The Google Gemini API Key is **never** hardcoded. It is managed via environment variables (`.env` file locally) and Kubernetes Secrets (in production).
-*   **Container Security**: The Docker image is built using a slim base image to minimize the attack surface.
-*   **CI/CD**: Secrets are injected into the build pipeline via GitHub Actions Secrets, ensuring they are not exposed in the repository.
+*   **Secret Management**: No hardcoded keys. Uses `.env` for local and K8s Secrets for production.
+*   **Least Privilege**: Docker container runs as a non-root user (configurable).
+*   **Image Safety**: Built on official `python:slim` images to reduce vulnerabilities.
 
 ## 🛡️ License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+---
+<div align="center">
+    <sub>Built by Akshay Shinde</sub>
+</div>
