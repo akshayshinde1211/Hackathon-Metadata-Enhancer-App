@@ -26,11 +26,11 @@ This project demonstrates a complete **End-to-End DevOps Lifecycle**, featuring 
 
 ```mermaid
 graph TD
-    User[User] -->|Uploads Files| UI[Frontend (HTML/JS)]
-    UI -->|POST /api/generate| API[FastAPI Backend]
-    API -->|Parse| Parser[Parser Service]
-    API -->|Context| AI[AI Service]
-    AI -->|Prompt| Gemini[Google Gemini API]
+    User[User] -->|Uploads Files| UI["Frontend (HTML/JS)"]
+    UI -->|POST /api/generate| API["FastAPI Backend"]
+    API -->|Parse| Parser["Parser Service"]
+    API -->|Context| AI["AI Service"]
+    AI -->|Prompt| Gemini["Google Gemini API"]
     Gemini -->|Description| AI
     AI -->|JSON Result| API
     API -->|Response| UI
