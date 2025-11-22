@@ -137,5 +137,14 @@ TCS/
 └── README.md               # Project documentation
 ```
 
+## 🔒 Security
+
+This project takes security seriously.
+
+*   **API Keys**: The Google Gemini API Key is **never** hardcoded. It is managed via environment variables (`.env` file locally) and Kubernetes Secrets (in production).
+*   **Container Security**: The Docker image is built using a slim base image to minimize the attack surface.
+*   **CI/CD**: Secrets are injected into the build pipeline via GitHub Actions Secrets, ensuring they are not exposed in the repository.
+
 ## 🛡️ License
-This project is a hackathon prototype created for demonstration purposes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
