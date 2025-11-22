@@ -18,7 +18,7 @@ spec:
       - name: metadata-enhancer
         # Replace 'your-dockerhub-username' with your actual Docker Hub username
         # You can update this manually or via a sed command in your deployment script
-        image: your-dockerhub-username/metadata-enhancer:latest
+        image: akshay1211/metadata-enhancer:latest
         ports:
         - containerPort: 8000
         resources:
