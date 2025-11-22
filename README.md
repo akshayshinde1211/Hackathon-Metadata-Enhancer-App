@@ -72,6 +72,49 @@ This project was built for the **TCS AI Fridays Hackathon** to demonstrate how G
 2.  **Access the Web Interface**:
     *   Open your browser and navigate to: `http://127.0.0.1:8000`
 
+## 🐳 Docker Support
+
+You can also run the application using Docker.
+
+1.  **Build the Container**:
+    ```bash
+    docker-compose build
+    ```
+
+2.  **Run the Container**:
+    ```bash
+    docker-compose up
+    ```
+    *The application will be available at `http://localhost:8000`.*
+
+## 🚀 DevOps Guide
+
+This project is equipped with a complete DevOps lifecycle.
+
+### 1. CI/CD Pipeline (GitHub Actions)
+The pipeline automatically runs tests and builds the Docker image on every push to `main`.
+
+**Setup:**
+1.  Push this code to a GitHub repository.
+2.  Go to **Settings > Secrets and variables > Actions**.
+3.  Add the following Repository Secrets:
+    *   `DOCKER_USERNAME`: Your Docker Hub username.
+    *   `DOCKER_PASSWORD`: Your Docker Hub access token.
+
+### 2. Kubernetes Deployment
+Deploy the application to any Kubernetes cluster.
+
+**Prerequisites:**
+*   `kubectl` installed and configured.
+*   A running Kubernetes cluster (e.g., Docker Desktop with Kubernetes enabled).
+
+**Deploy:**
+Run the helper script:
+```bash
+./scripts/deploy.sh
+```
+*You will be prompted to enter your Gemini API Key, which will be securely stored as a Kubernetes Secret.*
+
 ## 📂 Project Structure
 ```
 TCS/
