@@ -1,5 +1,4 @@
-# TCS AI Fridays Hackathon
-## Data Engineering Metadata Catalog Description Enhancer
+# TCS Hackathon Metadata Enhancer App
 
 ---
 

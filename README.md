@@ -1,4 +1,4 @@
-# TCS AI Fridays - Metadata Description Enhancer
+# TCS Hackathon Metadata Enhancer App
 
 ## 🚀 Project Overview
 The **Metadata Description Enhancer** is an intelligent data governance tool designed to solve the "blank cover" problem in enterprise data catalogs. By leveraging Generative AI (Google Gemini), it automatically analyzes technical schemas and raw data samples to generate rich, business-ready documentation, data quality insights, and usage recommendations.
