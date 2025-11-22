@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCS AI Fridays | Metadata Enhancer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tcsBlue: '#0067b1',
+                        tcsDarkBlue: '#004c82',
+                        tcsBlack: '#0a0a0a',
+                        tcsGray: '#f4f4f4',
+                        tcsPink: '#e81c71'
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 2px 15px rgba(0,0,0,0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle at top right, #0067b1 0%, transparent 60%);
+            opacity: 0.2;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #e81c71, #bf165e);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(232, 28, 113, 0.3);
+        }
+
+        .file-input-wrapper {
+            transition: all 0.2s ease;
+        }
+
+        .file-input-wrapper:hover {
+            border-color: #0067b1;
+            background-color: #f8fbff;
+        }
+    </style>
+</head>
+
+<body class="bg-tcsGray min-h-screen flex flex-col text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-black text-white py-4 px-6 shadow-md sticky top-0 z-50 border-b border-gray-800">
+        <div class="container mx-auto max-w-7xl flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <img src="/static/user_logo.png" alt="TCS Logo" class="h-10 w-auto object-contain bg-white rounded p-1">
+                <div class="hidden md:block h-6 w-px bg-gray-700"></div>
+                <span class="text-lg font-light tracking-wide text-gray-300">AI Fridays <span
+                        class="font-bold text-white">Hackathon</span></span>
+            </div>
+            <div class="text-sm font-semibold tracking-wider uppercase text-tcsBlue">
+                Building on Belief
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-white py-16 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="max-w-3xl">
+                <h1 class="text-5xl font-extrabold mb-6 leading-tight">
+                    Intelligent Data <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tcsBlue to-blue-400">Metadata
+                        Enhancer</span>
+                </h1>
+                <p class="text-xl text-gray-300 font-light leading-relaxed mb-8">
+                    Transform raw schemas into business-ready documentation using Generative AI.
+                    Standardize, enrich, and govern your data assets with precision.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto max-w-7xl px-6 -mt-10 pb-20 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- Left Panel: Input Configuration -->
+            <div class="lg:col-span-4">
+                <div class="bg-white rounded-lg shadow-card p-8 sticky top-24">
+                    <h3 class="text-xl font-bold text-tcsBlack mb-6 border-b pb-4 border-gray-100">
+                        Configuration
+                    </h3>
+
+                    <form id="uploadForm" class="space-y-6">
+                        <!-- Schema Upload -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+                                Schema Definition <span class="text-red-500">*</span>
+                            </label>
+                            <div
+                                class="file-input-wrapper relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer bg-gray-50">
+                                <input type="file" id="schemaFile" name="schema_file"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                                <div class="pointer-events-none">
+                                    <svg class="w-8 h-8 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
+                                    </svg>
+                                    <p id="schemaFileName" class="text-sm font-medium text-gray-600">Upload JSON or DDL
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample Data Upload -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+                                Sample Data
+                            </label>
+                            <div
+                                class="file-input-wrapper relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer bg-gray-50">
+                                <input type="file" id="dataFile" name="sample_data_file"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <div class="pointer-events-none">
+                                    <svg class="w-8 h-8 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    <p id="dataFileName" class="text-sm font-medium text-gray-600">Upload CSV (Optional)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Logs Upload -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+                                Usage Logs
+                            </label>
+                            <div
+                                class="file-input-wrapper relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer bg-gray-50">
+                                <input type="file" id="logsFile" name="logs_file"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <div class="pointer-events-none">
+                                    <svg class="w-8 h-8 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
+                                    </svg>
+                                    <p id="logsFileName" class="text-sm font-medium text-gray-600">Upload Logs
+                                        (Optional)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="generateBtn"
+                            class="btn-primary w-full py-4 px-6 text-white font-bold rounded-lg shadow-lg flex justify-center items-center gap-3 uppercase tracking-wide text-sm">
+                            <span>Generate Metadata</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div class="lg:col-span-8">
+
+                <!-- Loading State -->
+                <div id="loadingState"
+                    class="hidden bg-white rounded-lg shadow-card p-12 text-center h-full flex flex-col justify-center items-center min-h-[400px]">
+                    <div class="w-16 h-16 border-4 border-tcsBlue border-t-transparent rounded-full animate-spin mb-6">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Analyzing Data Assets</h3>
+                    <p class="text-gray-500">Please wait while our AI models generate the metadata description...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState"
+                    class="bg-white rounded-lg shadow-card p-12 text-center h-full flex flex-col justify-center items-center min-h-[400px] border border-gray-100">
+                    <div class="bg-gray-50 p-6 rounded-full mb-6">
+                        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">No Metadata Generated Yet</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Upload your schema and data files on the left to generate
+                        comprehensive documentation.</p>
+                </div>
+
+                <!-- Results Content -->
+                <div id="resultsContent" class="hidden space-y-8">
+
+                    <!-- Header & Actions -->
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold text-gray-800">Generated Documentation</h2>
+                        <div class="flex gap-3">
+                            <a href="/api/export/json" target="_blank"
+                                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 font-semibold rounded hover:bg-gray-50 transition-colors flex items-center gap-2 text-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Export JSON
+                            </a>
+                            <a href="/api/export/xml" target="_blank"
+                                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 font-semibold rounded hover:bg-gray-50 transition-colors flex items-center gap-2 text-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                                Export XML
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Overview Section -->
+                    <div class="bg-white rounded-lg shadow-card overflow-hidden">
+                        <div class="bg-tcsBlue px-6 py-4 border-b border-blue-700">
+                            <h3 class="text-white font-bold text-lg flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Executive Summary
+                            </h3>
+                        </div>
+                        <div class="p-8">
+                            <p id="overviewText" class="text-gray-700 leading-relaxed text-lg"></p>
+                        </div>
+                    </div>
+
+                    <!-- Two Column Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Data Quality -->
+                        <div class="bg-white rounded-lg shadow-card overflow-hidden border-t-4 border-yellow-500">
+                            <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                        </path>
+                                    </svg>
+                                    Data Quality Insights
+                                </h3>
+                            </div>
+                            <div class="p-6">
+                                <ul id="qualityList" class="space-y-3 text-sm text-gray-700"></ul>
+                            </div>
+                        </div>
+
+                        <!-- Usage Tips -->
+                        <div class="bg-white rounded-lg shadow-card overflow-hidden border-t-4 border-green-500">
+                            <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                                        </path>
+                                    </svg>
+                                    Usage Recommendations
+                                </h3>
+                            </div>
+                            <div class="p-6">
+                                <ul id="usageList" class="space-y-3 text-sm text-gray-700"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Details -->
+                    <div class="bg-white rounded-lg shadow-card p-8">
+                        <h3 class="font-bold text-gray-800 mb-6 border-b pb-2">Technical Specifications</h3>
+                        <div id="techDetails" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-tcsBlack text-white py-12 mt-auto">
+        <div class="container mx-auto max-w-7xl px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="text-sm text-gray-400">&copy; 2024 Tata Consultancy Services Limited. All Rights Reserved.
+                    </p>
+                </div>
+                <div class="flex gap-6 text-sm font-semibold text-gray-400">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Use</a>
+                    <a href="#" class="hover:text-white transition-colors">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+    <script>
+        // Simple file input visual feedback
+        ['schema', 'data', 'logs'].forEach(type => {
+            const input = document.getElementById(`${type}File`);
+            const label = document.getElementById(`${type}FileName`);
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    label.textContent = e.target.files[0].name;
+                    label.classList.add('text-tcsBlue', 'font-bold');
+                    input.parentElement.classList.add('border-tcsBlue', 'bg-blue-50');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
